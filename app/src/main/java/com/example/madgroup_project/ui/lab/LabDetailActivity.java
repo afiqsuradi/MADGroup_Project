@@ -1,8 +1,7 @@
-package com.example.madgroup_project;
+package com.example.madgroup_project.ui.lab;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import com.example.madgroup_project.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.view.View;
 import android.widget.Button;
 
 public class LabDetailActivity extends AppCompatActivity {
