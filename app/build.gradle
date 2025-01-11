@@ -29,7 +29,8 @@ android {
 }
 
 dependencies {
-
+    annotationProcessor libs.androidx.room.compiler
+    implementation libs.room.runtime
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
