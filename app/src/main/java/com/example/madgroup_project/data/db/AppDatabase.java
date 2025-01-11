@@ -15,6 +15,7 @@ import com.example.madgroup_project.data.dao.LabDao;
 import com.example.madgroup_project.data.models.ConditionConverter;
 import com.example.madgroup_project.data.models.Item;
 import com.example.madgroup_project.data.models.Lab;
+import com.example.madgroup_project.data.utils.JsonUtil;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -34,9 +35,31 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "lab_inventory_db")
+                    .addCallback(new Callback() {
+                        @Override
+                        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                            super.onCreate(db);
+                            Log.d("AppDatabase", "OnCreate Triggered");
+                            databaseExecutor.execute(()->{
+                                AppDatabase database = AppDatabase.getInstance(context);
+                                seedDatabase(database.labDao(), context);
+                            });
+                        }
+                    })
                             .fallbackToDestructiveMigration()
                             .build();
         }
         return instance;
+    }
+
+    private static void seedDatabase(LabDao labDao, Context context) {
+        if (labDao.getAllLabs().getValue()==null || labDao.getAllLabs().getValue().isEmpty()){
+            List<Lab> labs = JsonUtil.loadLabs(context);
+            if(labs !=null){
+                for(Lab lab:labs){
+                    labDao.insert(lab);
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Makmal Pengaturcaraan",
+    "code": "MP",
+    "supervisor": "Abu Tate",
+    "status": "Open",
+    "capacity": 20
+  },
+  {
+    "name": "Makmal Permainan Video",
+    "code": "GAME",
+    "supervisor": "Andrew DMA",
+    "status": "Closed",
+    "capacity": 15
+  },
+  {
+    "name": "Makmal Sistem",
+    "code": "MS",
+    "supervisor": "Aramugam",
+    "status": "Open",
+    "capacity": 25
+  },
+  {
+    "name": "Makmal Realiti Maya",
+    "code": "AR",
+    "supervisor": "Ayah Pin",
+    "status": "Under Maintenance",
+    "capacity": 25
+  }
+]
