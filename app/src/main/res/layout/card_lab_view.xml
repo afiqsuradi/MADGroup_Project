@@ -1,37 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
-    android:layout_margin="8dp"
-    android:onClick="onLabCardClick">
+    app:cardCornerRadius="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-
-        <!-- Lab Name -->
-        <TextView
-            android:id="@+id/lab_name"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_weight="15"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lab Name"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_margin="14dp"
+            android:orientation="vertical">
 
-        <!-- Lab Description (Optional) -->
-        <TextView
-            android:id="@+id/lab_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/labNameTextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Makmal Pengaturcaraan"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+
+                />
+
+            <TextView
+                android:id="@+id/labCodeTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="MP"
+                android:textColor="#4a4a4a"
+                android:textSize="14sp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="12dp" />
+
+            <TextView
+                android:id="@+id/labSupervisorTextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Abu Tate"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@color/design_default_color_primary"
+                android:src="@drawable/next_icon_vector"
+                android:drawableTint="@color/white"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
