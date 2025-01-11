@@ -21,6 +21,13 @@ output.json
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
+.gradle
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
 
 # Keystore files
 *.jks
@@ -31,3 +38,10 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
