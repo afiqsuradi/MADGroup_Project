@@ -27,6 +27,9 @@ public class Item {
     @ColumnInfo(name = "name")
     private String name;
 
+    @ColumnInfo(name = "type")
+    private String type;
+
     @ColumnInfo(name = "serial_number")
     private String serialNumber;
 
@@ -78,6 +81,14 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSerialNumber() {
