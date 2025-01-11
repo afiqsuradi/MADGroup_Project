@@ -35,17 +35,17 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "lab_inventory_db")
-                    .addCallback(new Callback() {
-                        @Override
-                        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                            super.onCreate(db);
-                            Log.d("AppDatabase", "OnCreate Triggered");
-                            databaseExecutor.execute(()->{
-                                AppDatabase database = AppDatabase.getInstance(context);
-                                seedDatabase(database.labDao(), context);
-                            });
-                        }
-                    })
+                            .addCallback(new Callback() {
+                                @Override
+                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                    super.onCreate(db);
+                                    Log.d("AppDatabase", "Seeding Database");
+                                    databaseExecutor.execute(()->{
+                                        AppDatabase database = AppDatabase.getInstance(context);
+                                        seedDatabase(database.labDao(), context);
+                                    });
+                                }
+                            })
                             .fallbackToDestructiveMigration()
                             .build();
         }
