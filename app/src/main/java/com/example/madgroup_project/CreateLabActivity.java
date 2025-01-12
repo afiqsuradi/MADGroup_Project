@@ -2,55 +2,101 @@ package com.example.madgroup_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.madgroup_project.data.models.Lab;
+import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class CreateLabActivity extends AppCompatActivity {
 
-    private EditText etLabName, etLabDescription, etLabEquipment;
+    private EditText etLabName, etLabDescription, etLabCode, etLabSupervisor, etLabCapacity;
     private Button btnSaveLab, backButton;
+    private LabViewModel labViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_lab);
 
+        labViewModel = new ViewModelProvider(this).get(LabViewModel.class);
+
+        initViews();
+        setupBackButton();
+        setupSaveButton();
+    }
+
+    private void initViews() {
         etLabName = findViewById(R.id.etLabName);
         etLabDescription = findViewById(R.id.etLabDescription);
-        etLabEquipment = findViewById(R.id.etLabEquipment);
+        etLabSupervisor = findViewById(R.id.etLabSupervisor);
+        etLabCapacity = findViewById(R.id.etLabCapacity);
+        etLabCode = findViewById(R.id.etLabCode);
         btnSaveLab = findViewById(R.id.btnSaveLab);
-        backButton = findViewById(R.id.backButton); // Find the back button
+        backButton = findViewById(R.id.backButton);
+    }
 
-        // Handle the Back Button Click
-        backButton.setOnClickListener(v -> {
-            onBackPressed(); // Call the default back functionality
-        });
+    private void setupBackButton() {
+        backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+    }
 
+    private void setupSaveButton() {
         btnSaveLab.setOnClickListener(v -> {
-            String labName = etLabName.getText().toString().trim();
-            String labDescription = etLabDescription.getText().toString().trim();
-            String equipmentText = etLabEquipment.getText().toString().trim();
-
-            if (labName.isEmpty() || labDescription.isEmpty()) {
-                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
-                return;
+            if(validateInput()) {
+                saveLab();
             }
-
-            ArrayList<String> equipmentList = new ArrayList<>(Arrays.asList(equipmentText.split(",")));
-
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("lab_name", labName);
-            resultIntent.putExtra("lab_description", labDescription);
-            resultIntent.putStringArrayListExtra("lab_equipment", equipmentList);
-            setResult(RESULT_OK, resultIntent);
-            finish();
         });
+    }
+
+    private boolean validateInput() {
+        String labName = Objects.requireNonNull(etLabName.getText()).toString().trim();
+        String labDescription = Objects.requireNonNull(etLabDescription.getText()).toString().trim();
+        String labCode = Objects.requireNonNull(etLabCode.getText()).toString().trim();
+        String labSupervisor = Objects.requireNonNull(etLabSupervisor.getText()).toString().trim();
+        String labCapacityString = Objects.requireNonNull(etLabCapacity.getText()).toString().trim();
+
+        if (TextUtils.isEmpty(labName) || TextUtils.isEmpty(labDescription) ||
+                TextUtils.isEmpty(labCode) || TextUtils.isEmpty(labSupervisor) || TextUtils.isEmpty(labCapacityString) ) {
+            showToast("Please fill out all fields.");
+            return false;
+        }
+        try {
+            Integer.parseInt(labCapacityString);
+        } catch (NumberFormatException e) {
+            showToast("Invalid Capacity, please enter a valid number.");
+            return false;
+        }
+        return true;
+    }
+
+    private void saveLab() {
+        String labName = Objects.requireNonNull(etLabName.getText()).toString().trim();
+        String labDescription = Objects.requireNonNull(etLabDescription.getText()).toString().trim();
+        String labCode = Objects.requireNonNull(etLabCode.getText()).toString().trim();
+        String labSupervisor = Objects.requireNonNull(etLabSupervisor.getText()).toString().trim();
+        int labCapacity = Integer.parseInt(Objects.requireNonNull(etLabCapacity.getText()).toString().trim());
+
+
+        Lab newLab = new Lab(labName, labDescription, labCode, labSupervisor, "Open", labCapacity);
+        labViewModel.insert(newLab);
+
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
+
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
 
