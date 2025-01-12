@@ -17,6 +17,9 @@ public class Lab {
     @ColumnInfo(name = "name")
     private String name;
 
+    @ColumnInfo(name = "description")
+    private String description;
+
     @ColumnInfo(name = "code")
     private String code;
 
@@ -43,8 +46,9 @@ public class Lab {
         this.updatedAt= new Date();
     }
 
-    public Lab(String name, String code, String supervisor, String status, int capacity) {
+    public Lab(String name, String description, String code, String supervisor, String status, int capacity) {
         this.name = name;
+        this.description = description;
         this.code = code;
         this.supervisor = supervisor;
         this.status = status;
@@ -67,6 +71,14 @@ public class Lab {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCode() {
