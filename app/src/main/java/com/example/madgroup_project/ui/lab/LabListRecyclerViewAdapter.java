@@ -1,17 +1,23 @@
 package com.example.madgroup_project.ui.lab;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.madgroup_project.LabDetailActivity;
 import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LabListRecyclerViewAdapter extends RecyclerView.Adapter<LabListRecyclerViewAdapter.LabViewHolder> {
     private List<Lab> labs;
@@ -43,11 +49,25 @@ public class LabListRecyclerViewAdapter extends RecyclerView.Adapter<LabListRecy
         holder.labNameTextview.setText(labs.get(position).getName());
         holder.labCodeTextview.setText(labs.get(position).getCode());
         holder.labSupervisorTextview.setText(labs.get(position).getSupervisor());
+
+        holder.labCardView.setOnClickListener(v -> onCardClicked(v, holder));
     }
 
     @Override
     public int getItemCount() {
         return labs == null ? 0 : labs.size();
+    }
+
+    private void onCardClicked(View v, @NonNull LabListRecyclerViewAdapter.LabViewHolder holder){
+        int adapterPosition = holder.getAdapterPosition();
+        if(adapterPosition != RecyclerView.NO_POSITION){
+            Context context = v.getContext();
+            Intent intent = new Intent(context, LabDetailActivity.class);
+            Lab lab = labs.get(adapterPosition);
+            intent.putExtra("lab_id", lab.getId());
+            context.startActivity(intent);
+
+        }
     }
 
     public class LabViewHolder extends RecyclerView.ViewHolder{
@@ -56,11 +76,15 @@ public class LabListRecyclerViewAdapter extends RecyclerView.Adapter<LabListRecy
         private TextView labCodeTextview;
         private TextView labSupervisorTextview;
 
+        private CardView labCardView;
+
         public LabViewHolder(@NonNull View itemView) {
             super(itemView);
             labNameTextview = itemView.findViewById(R.id.labNameTextview);
             labCodeTextview = itemView.findViewById(R.id.labCodeTextview);
             labSupervisorTextview = itemView.findViewById(R.id.labSupervisorTextview);
+            labCardView = itemView.findViewById(R.id.labCardView);
         }
+
     }
 }
