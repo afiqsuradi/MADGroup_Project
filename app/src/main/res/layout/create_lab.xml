@@ -20,16 +20,34 @@
         android:hint="Lab Name" />
 
     <EditText
+        android:id="@+id/etLabCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Lab Code" />
+
+    <EditText
         android:id="@+id/etLabDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Lab Description" />
 
     <EditText
-        android:id="@+id/etLabEquipment"
+        android:id="@+id/etLabSupervisor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Equipment (comma-separated)" />
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Supervisor" />
+
+    <EditText
+        android:id="@+id/etLabCapacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:hint="Capacity"/>
 
     <Button
         android:id="@+id/btnSaveLab"
