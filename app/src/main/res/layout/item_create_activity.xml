@@ -116,9 +116,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColorHint="@color/background"
-                android:hint="Please select type"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/NoAnimationTextInputLayout"
                 >
 
                 <AutoCompleteTextView
@@ -126,6 +124,8 @@
                     android:background="@drawable/edit_text_background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Please select type"
+                    android:textColorHint="@color/background"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,9 +157,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColorHint="@color/background"
-                android:hint="Please select condition"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/NoAnimationTextInputLayout"
                 >
 
                 <AutoCompleteTextView
@@ -167,6 +165,8 @@
                     android:background="@drawable/edit_text_background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Please select condition"
+                    android:textColorHint="@color/background"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -236,7 +236,7 @@
                 app:srcCompat="@drawable/back_arrow_icon" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvLabName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

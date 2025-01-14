@@ -182,7 +182,7 @@
 
     <ImageButton
         android:layout_margin="24dp"
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnAddItem"
         android:layout_width="56dp"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"

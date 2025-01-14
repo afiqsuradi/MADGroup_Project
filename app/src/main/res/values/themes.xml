@@ -1,8 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MADGroup_Project" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/background</item>
+        <item name="colorPrimary">@color/background</item>
         <item name="materialButtonStyle">@style/CustomButton</item>
     </style>
 
@@ -11,5 +10,10 @@
         <item name="backgroundTint">@color/button</item>
         <item name="android:textColor">@color/textPrimary</item>
         <item name="rippleColor">@color/button_pressed</item>
+    </style>
+    <style name="NoAnimationTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="hintEnabled">false</item>
+        <item name="boxStrokeColor">@color/textPrimary</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
     </style>
 </resources>

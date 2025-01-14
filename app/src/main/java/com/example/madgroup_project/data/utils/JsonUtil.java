@@ -3,6 +3,7 @@ package com.example.madgroup_project.data.utils;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.madgroup_project.data.models.Item;
 import com.example.madgroup_project.data.models.Lab;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,5 +34,24 @@ public class JsonUtil {
         Type listType = new TypeToken<List<Lab>>(){}.getType();
         return gson.fromJson(jsonString, listType);
 
+    }
+
+    public static List<Item> loadItems(Context context){
+        String jsonString = null;
+        try {
+            InputStream inputStream = context.getAssets().open("items_seed.json");
+            Log.d("JsonUtil", "Opened items_seed.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            jsonString = new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            Log.e("JsonUtil", e.getMessage());
+            return null;
+        }
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Item>>(){}.getType();
+        return gson.fromJson(jsonString, listType);
     }
 }
