@@ -13,8 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class CreateLabActivity extends AppCompatActivity {
@@ -26,7 +24,7 @@ public class CreateLabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_lab);
+        setContentView(R.layout.lab_create_activity);
 
         labViewModel = new ViewModelProvider(this).get(LabViewModel.class);
 

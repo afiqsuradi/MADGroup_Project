@@ -2,7 +2,6 @@ package com.example.madgroup_project.ui.lab;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 
 import java.util.List;
-import java.util.Objects;
 
 public class LabListRecyclerViewAdapter extends RecyclerView.Adapter<LabListRecyclerViewAdapter.LabViewHolder> {
     private List<Lab> labs;
