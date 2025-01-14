@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/card"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Makmal Pengaturcaraan"
-                android:textColor="@color/black"
+                android:textColor="@color/textPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold"
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="MP"
-                android:textColor="#4a4a4a"
+                android:textColor="@color/textSecondary"
                 android:textSize="14sp" />
 
             <Space
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|start"
                     android:text="Abu Tate"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textPrimary"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -81,8 +81,8 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:backgroundTint="@color/design_default_color_primary"
-                android:drawableTint="@color/white"
+                android:backgroundTint="@color/button"
+                android:drawableTint="@color/button"
                 android:scaleType="centerInside"
                 android:src="@drawable/next_icon_vector"
                 app:layout_constraintBottom_toBottomOf="parent"
