@@ -1,5 +1,7 @@
 package com.example.madgroup_project.data.models;
 import com.example.madgroup_project.data.ItemConditions;
+import com.example.madgroup_project.data.ItemTypes;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -27,8 +29,9 @@ public class Item {
     @ColumnInfo(name = "name")
     private String name;
 
+    @TypeConverters(ItemTypeConverter.class)
     @ColumnInfo(name = "type")
-    private String type;
+    private ItemTypes type;
 
     @ColumnInfo(name = "serial_number")
     private String serialNumber;
@@ -83,11 +86,11 @@ public class Item {
         this.name = name;
     }
 
-    public String getType() {
+    public ItemTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ItemTypes type) {
         this.type = type;
     }
 
