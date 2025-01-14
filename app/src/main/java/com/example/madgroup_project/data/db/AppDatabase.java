@@ -36,31 +36,51 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "lab_inventory_db")
-                            .addCallback(new Callback() {
-                                @Override
-                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                    super.onCreate(db);
-                                    Log.d("AppDatabase", "Seeding Database");
-                                    databaseExecutor.execute(()->{
-                                        AppDatabase database = AppDatabase.getInstance(context);
-                                        seedDatabase(database.labDao(), context);
-                                    });
-                                }
-                            })
-                            .fallbackToDestructiveMigration()
-                            .build();
+                    .addCallback(new Callback() {
+                        @Override
+                        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                            super.onCreate(db);
+                            Log.d("AppDatabase", "Seeding Database");
+                            seedDatabase(context);
+                        }
+                    })
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return instance;
     }
 
-    private static void seedDatabase(LabDao labDao, Context context) {
-        if (labDao.getAllLabs().getValue()==null || labDao.getAllLabs().getValue().isEmpty()){
-            List<Lab> labs = JsonUtil.loadLabs(context);
-            if(labs !=null){
-                for(Lab lab:labs){
-                    labDao.insert(lab);
+    private static void seedDatabase(final Context context) {
+        databaseExecutor.execute(() -> {
+            try {
+                AppDatabase database = AppDatabase.getInstance(context);
+
+                // First, seed the labs
+                List<Lab> labs = JsonUtil.loadLabs(context);
+                if (labs != null) {
+                    for (Lab lab : labs) {
+                        database.labDao().insert(lab);
+                    }
+                    Log.d("AppDatabase", "Lab data seeded successfully.");
                 }
+
+                // Then, seed the items
+                List<Item> items = JsonUtil.loadItems(context);
+                if (items != null) {
+                    for (Item item : items) {
+                        try {
+                            database.itemDao().insert(item);
+                        } catch (Exception e) {
+                            Log.e("AppDatabase", "Error inserting item: " + item.getName() +
+                                    " with lab_id: " + item.getLabId() +
+                                    ". Error: " + e.getMessage());
+                        }
+                    }
+                    Log.d("AppDatabase", "Item data seeded successfully.");
+                }
+            } catch (Exception e) {
+                Log.e("AppDatabase", "Error seeding database: " + e.getMessage());
             }
-        }
+        });
     }
 }

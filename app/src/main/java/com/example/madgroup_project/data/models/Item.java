@@ -1,6 +1,7 @@
 package com.example.madgroup_project.data.models;
 import com.example.madgroup_project.data.ItemConditions;
 import com.example.madgroup_project.data.ItemTypes;
+import com.google.gson.annotations.SerializedName;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -23,19 +24,24 @@ public class Item {
     @ColumnInfo(name = "id")
     private int id;
 
+    @SerializedName("lab_id")
     @ColumnInfo(name = "lab_id")
     private int labId;
 
+    @SerializedName("name")
     @ColumnInfo(name = "name")
     private String name;
 
+    @SerializedName("type")
     @TypeConverters(ItemTypeConverter.class)
     @ColumnInfo(name = "type")
     private ItemTypes type;
 
+    @SerializedName("serialNumber")
     @ColumnInfo(name = "serial_number")
     private String serialNumber;
 
+    @SerializedName("condition")
     @TypeConverters(ConditionConverter.class)
     @ColumnInfo(name = "condition")
     private ItemConditions condition;

@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 @Entity(tableName = "labs")
@@ -14,21 +16,27 @@ public class Lab {
     @ColumnInfo(name = "id")
     private int id;
 
+    @SerializedName("name")
     @ColumnInfo(name = "name")
     private String name;
 
+    @SerializedName("description")
     @ColumnInfo(name = "description")
     private String description;
 
+    @SerializedName("code")
     @ColumnInfo(name = "code")
     private String code;
 
+    @SerializedName("supervisor")
     @ColumnInfo(name = "supervisor")
     private String supervisor;
 
+    @SerializedName("status")
     @ColumnInfo(name = "status")
     private String status;
 
+    @SerializedName("capacity")
     @ColumnInfo(name = "capacity")
     private int capacity;
 
