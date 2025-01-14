@@ -14,6 +14,7 @@ import com.example.madgroup_project.data.dao.ItemDao;
 import com.example.madgroup_project.data.dao.LabDao;
 import com.example.madgroup_project.data.models.ConditionConverter;
 import com.example.madgroup_project.data.models.Item;
+import com.example.madgroup_project.data.models.ItemTypeConverter;
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.utils.JsonUtil;
 
@@ -22,7 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Lab.class, Item.class}, version = 1, exportSchema = false)
-@TypeConverters({ConditionConverter.class})
+@TypeConverters({ConditionConverter.class, ItemTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
