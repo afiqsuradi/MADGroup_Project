@@ -1,0 +1,422 @@
+[
+  {
+    "lab_id": 1,
+    "name": "Intel Core i7-12700K Desktop CPU",
+    "type": "COMPUTER",
+    "serialNumber": "CPU-INTEL12700-001",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 1,
+    "name": "Logitech G Pro Wireless Mouse",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "MOU-LOGGPRO-004",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 1,
+    "name": "SteelSeries Apex Pro Keyboard",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "KBD-STLSPRO-005",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":1,
+    "name": "ASUS 27 inch Gaming Monitor",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber":"MON-ASUS27-006",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 1,
+    "name": "Epson Projector EB-980W",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "PRJ-EPS980-007",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 1,
+    "name": "Audio-Technica AT2020 Microphone",
+    "type": "AUDIO",
+    "serialNumber": "MIC-AT2020-008",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":1,
+    "name":"Logitech Speaker Z200",
+    "type":"AUDIO",
+    "serialNumber":"SPK-LOGZ200-009",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 1,
+    "name": "HDMI Cable",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "CBL-HDMI-010",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 1,
+    "name": "Network Switch 8 Port",
+    "type":"NETWORK",
+    "serialNumber":"NWS-8PORT-011",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 1,
+    "name":"White Board",
+    "type":"MISCELLANEOUS",
+    "serialNumber":"WB-1234-012",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 2,
+    "name": "AMD Ryzen 9 5900X Desktop CPU",
+    "type": "COMPUTER",
+    "serialNumber": "CPU-AMD5900-001",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 2,
+    "name": "Razer DeathAdder Elite Mouse",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "MOU-RAZDE-004",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 2,
+    "name": "HyperX Alloy Elite Keyboard",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "KBD-HYPELT-005",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":2,
+    "name":"Samsung Odyssey G7 Monitor",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber":"MON-SAMG7-006",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 2,
+    "name": "BenQ Projector MW536",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "PRJ-BENQ536-007",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":2,
+    "name":"Blue Yeti Microphone",
+    "type":"AUDIO",
+    "serialNumber":"MIC-BYETI-008",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":2,
+    "name":"Bose Speaker Companion 2",
+    "type":"AUDIO",
+    "serialNumber":"SPK-BOSE2-009",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 2,
+    "name": "DisplayPort Cable",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "CBL-DP-010",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 2,
+    "name": "Network Switch 16 Port",
+    "type": "NETWORK",
+    "serialNumber": "NWS-16PORT-011",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 2,
+    "name": "Projector Screen",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "PRS-1234-012",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 3,
+    "name": "AMD Ryzen 5 5600X Desktop CPU",
+    "type": "COMPUTER",
+    "serialNumber": "CPU-AMD5600-001",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 3,
+    "name": "Corsair M65 Mouse",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "MOU-CRSM65-004",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 3,
+    "name": "Logitech G213 Keyboard",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "KBD-LOGG213-005",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":3,
+    "name":"Dell Alienware AW2521H Monitor",
+    "type":"COMPUTER_ACCESSORY",
+    "serialNumber":"MON-DELLAW25-006",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 3,
+    "name": "Sony VPL-PHZ12 Projector",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "PRJ-SONY12-007",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":3,
+    "name":"Rode NT-USB+ Microphone",
+    "type":"AUDIO",
+    "serialNumber":"MIC-RNTUSB-008",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":3,
+    "name":"Harman Kardon Soundsticks 4",
+    "type":"AUDIO",
+    "serialNumber":"SPK-HAR4-009",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 3,
+    "name": "VGA Cable",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "CBL-VGA-010",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 3,
+    "name":"Router",
+    "type":"NETWORK",
+    "serialNumber":"RTR-1234-011",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":3,
+    "name":"Extension Cord",
+    "type":"MISCELLANEOUS",
+    "serialNumber":"EC-1234-012",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 4,
+    "name": "Intel Core i9-13900K Desktop CPU",
+    "type": "COMPUTER",
+    "serialNumber": "CPU-INTEL13900-001",
+    "condition": "MAINTENANCE"
+  },
+  {
+    "lab_id": 4,
+    "name": "SteelSeries Rival 600 Mouse",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "MOU-STLRIV600-004",
+    "condition": "MAINTENANCE"
+  },
+  {
+    "lab_id": 4,
+    "name": "Roccat Vulcan 121 Keyboard",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "KBD-ROCVUL121-005",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 4,
+    "name": "LG Ultragear 27GN950 Monitor",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber":"MON-LGU27-006",
+    "condition":"BROKEN"
+  },
+  {
+    "lab_id": 4,
+    "name": "Optoma HD29HLV Projector",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "PRJ-OPTHD29-007",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":4,
+    "name":"Shure SM7B Microphone",
+    "type":"AUDIO",
+    "serialNumber":"MIC-SHUSM7B-008",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":4,
+    "name":"Edifier Speaker R1280T",
+    "type":"AUDIO",
+    "serialNumber":"SPK-EDI1280-009",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 4,
+    "name": "USB Cable",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "CBL-USB-010",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":4,
+    "name":"Firewall",
+    "type":"NETWORK",
+    "serialNumber":"FW-1234-011",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":4,
+    "name":"USB Hub",
+    "type":"MISCELLANEOUS",
+    "serialNumber":"HUB-1234-012",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 5,
+    "name": "Intel Core i5-13600K Desktop CPU",
+    "type": "COMPUTER",
+    "serialNumber": "CPU-INTEL13600-001",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 5,
+    "name": "Logitech MX Master 3 Mouse",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "MOU-LOGMXM3-004",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 5,
+    "name": "Keychron K2 Keyboard",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "KBD-KEYK2-005",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id": 5,
+    "name":"ASUS TUF Gaming VG27AQ Monitor",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber":"MON-ASUTUF-006",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 5,
+    "name": "Panasonic PT-VZ580 Projector",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "PRJ-PANVZ580-007",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":5,
+    "name":"AKG Lyra Microphone",
+    "type":"AUDIO",
+    "serialNumber":"MIC-AKGLYRA-008",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":5,
+    "name":"Audioengine Speaker A2+",
+    "type":"AUDIO",
+    "serialNumber":"SPK-AUDA2-009",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 5,
+    "name": "Power Cable",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "CBL-POWER-010",
+    "condition": "WORKING"
+  },
+  {
+    "lab_id":5,
+    "name":"Repeater",
+    "type":"NETWORK",
+    "serialNumber":"RPT-1234-011",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":5,
+    "name":"Monitor Mount",
+    "type":"MISCELLANEOUS",
+    "serialNumber":"MM-1234-012",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 6,
+    "name": "N/A Desktop CPU",
+    "type": "COMPUTER",
+    "serialNumber": "CPU-N/A-001",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 6,
+    "name": "N/A Mouse",
+    "type": "COMPUTER_ACCESSORY",
+    "serialNumber": "MOU-N/A-004",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 6,
+    "name":"N/A Keyboard",
+    "type":"COMPUTER_ACCESSORY",
+    "serialNumber":"KBD-N/A-005",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 6,
+    "name":"N/A Monitor",
+    "type":"COMPUTER_ACCESSORY",
+    "serialNumber":"MON-N/A-006",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 6,
+    "name":"N/A Projector",
+    "type":"MISCELLANEOUS",
+    "serialNumber":"PRJ-N/A-007",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":6,
+    "name":"N/A Microphone",
+    "type":"AUDIO",
+    "serialNumber":"MIC-N/A-008",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":6,
+    "name":"N/A Speaker",
+    "type":"AUDIO",
+    "serialNumber":"SPK-N/A-009",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id": 6,
+    "name": "N/A Cable",
+    "type": "MISCELLANEOUS",
+    "serialNumber": "CBL-N/A-010",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":6,
+    "name":"N/A Switch",
+    "type":"NETWORK",
+    "serialNumber":"NWS-N/A-011",
+    "condition":"WORKING"
+  },
+  {
+    "lab_id":6,
+    "name":"N/A Tool",
+    "type":"MISCELLANEOUS",
+    "serialNumber":"TL-N/A-012",
+    "condition":"WORKING"
+  }
+]
