@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ public class ItemCreateActivity extends AppCompatActivity {
     private AutoCompleteTextView actvItemType, actvItemCondition;
     private EditText etItemName, etItemSerialNo;
     private Button btnCancel, btnAdd;
+
+    private ImageButton btnBack;
     private TextView tvLabName;
     private int labId;
     private LabViewModel labViewModel;
@@ -59,11 +62,13 @@ public class ItemCreateActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnAdd = findViewById(R.id.btnAdd);
         tvLabName = findViewById(R.id.tvLabName);
+        btnBack = findViewById(R.id.btnBack);
     }
 
 
     private void setupListeners(){
-        btnCancel.setOnClickListener(v -> onBackPressed());
+        btnCancel.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         btnAdd.setOnClickListener(v -> addItem());
     }
 
