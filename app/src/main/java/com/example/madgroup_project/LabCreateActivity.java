@@ -37,11 +37,11 @@ public class LabCreateActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        etLabName = findViewById(R.id.etLabName);
+        etLabName = findViewById(R.id.tvLabName);
         etLabDescription = findViewById(R.id.etLabDescription);
-        etLabSupervisor = findViewById(R.id.etLabSupervisor);
-        etLabCapacity = findViewById(R.id.etLabCapacity);
-        etLabCode = findViewById(R.id.etLabCode);
+        etLabSupervisor = findViewById(R.id.tvLabSupervisor);
+        etLabCapacity = findViewById(R.id.tvLabCapacity);
+        etLabCode = findViewById(R.id.tvLabCode);
         btnSaveLab = findViewById(R.id.btnAdd);
         btnBack = findViewById(R.id.btnBack);
         btnCancel = findViewById(R.id.btnCancel);
