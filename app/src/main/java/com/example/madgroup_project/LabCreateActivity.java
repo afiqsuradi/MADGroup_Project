@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +16,12 @@ import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
 import java.util.Objects;
 
-public class CreateLabActivity extends AppCompatActivity {
+public class LabCreateActivity extends AppCompatActivity {
 
     private EditText etLabName, etLabDescription, etLabCode, etLabSupervisor, etLabCapacity;
-    private Button btnSaveLab, backButton;
+    private Button btnSaveLab, btnCancel;
+
+    private ImageButton btnBack;
     private LabViewModel labViewModel;
 
     @Override
@@ -39,12 +42,14 @@ public class CreateLabActivity extends AppCompatActivity {
         etLabSupervisor = findViewById(R.id.etLabSupervisor);
         etLabCapacity = findViewById(R.id.etLabCapacity);
         etLabCode = findViewById(R.id.etLabCode);
-        btnSaveLab = findViewById(R.id.btnSaveLab);
-        backButton = findViewById(R.id.backButton);
+        btnSaveLab = findViewById(R.id.btnAdd);
+        btnBack = findViewById(R.id.btnBack);
+        btnCancel = findViewById(R.id.btnCancel);
     }
 
     private void setupBackButton() {
-        backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        btnCancel.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
     }
 
     private void setupSaveButton() {

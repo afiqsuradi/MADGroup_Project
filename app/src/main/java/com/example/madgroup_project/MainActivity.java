@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToCreateLabActivity(){
-        Intent intent = new Intent(this, CreateLabActivity.class);
+        Intent intent = new Intent(this, LabCreateActivity.class);
         startActivity(intent);
     }
 }
