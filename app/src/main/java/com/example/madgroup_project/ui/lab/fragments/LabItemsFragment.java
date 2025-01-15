@@ -13,19 +13,15 @@ import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LabItemsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class LabItemsFragment extends Fragment {
 
     private static final String LAB_ID = "lab_id";
     private Lab lab;
     private LabViewModel labViewModel;
 
-    public static LabDashboardFragment newInstance(int param1) {
-        LabDashboardFragment fragment = new LabDashboardFragment();
+    public static LabItemsFragment newInstance(int param1) {
+        LabItemsFragment fragment = new LabItemsFragment();
         Bundle args = new Bundle();
         args.putInt(LAB_ID, param1);
         fragment.setArguments(args);
@@ -45,9 +41,7 @@ public class LabItemsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_lab_items, container, false);
     }
 }
