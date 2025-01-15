@@ -93,6 +93,7 @@ public class LabCreateActivity extends AppCompatActivity {
         labViewModel.insert(newLab);
 
         Intent resultIntent = new Intent();
+        showToast("Lab successfully added.");
         setResult(RESULT_OK, resultIntent);
         finish();
     }
