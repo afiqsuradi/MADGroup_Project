@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,7 +48,7 @@ public class LabListRecyclerViewAdapter extends RecyclerView.Adapter<LabListRecy
         holder.labNameTextview.setText(labs.get(position).getName());
         holder.labCodeTextview.setText(labs.get(position).getCode());
         holder.labSupervisorTextview.setText(labs.get(position).getSupervisor());
-
+        holder.btnLabDetail.setOnClickListener(v -> onCardClicked(v, holder));
         holder.labCardView.setOnClickListener(v -> onCardClicked(v, holder));
     }
 
@@ -74,7 +75,10 @@ public class LabListRecyclerViewAdapter extends RecyclerView.Adapter<LabListRecy
         private TextView labCodeTextview;
         private TextView labSupervisorTextview;
 
+        private ImageButton btnLabDetail;
         private CardView labCardView;
+
+
 
         public LabViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +86,7 @@ public class LabListRecyclerViewAdapter extends RecyclerView.Adapter<LabListRecy
             labCodeTextview = itemView.findViewById(R.id.labCodeTextview);
             labSupervisorTextview = itemView.findViewById(R.id.labSupervisorTextview);
             labCardView = itemView.findViewById(R.id.labCardView);
+            btnLabDetail = itemView.findViewById(R.id.btnLabDetail);
         }
 
     }
