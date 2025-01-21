@@ -50,7 +50,7 @@ public class LabRepository {
         return labDao.searchLabs(query);
     }
 
-    public LiveData<List<LabItemsSummary>> getLabSummary(int labId){
+    public LiveData<LabItemsSummary> getLabSummary(int labId){
         return labDao.getLabSummary(labId);
     }
 }

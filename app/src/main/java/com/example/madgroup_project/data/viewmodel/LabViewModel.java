@@ -46,7 +46,7 @@ public class LabViewModel extends AndroidViewModel {
         return repository.searchLabs(query);
     }
 
-    public LiveData<List<LabItemsSummary>> getLabSummary(int labId){
+    public LiveData<LabItemsSummary> getLabSummary(int labId){
         return repository.getLabSummary(labId);
     }
 }

@@ -38,5 +38,5 @@ public interface LabDao {
 
 
     @Query("SELECT COUNT(*) AS total_items, COUNT(CASE WHEN condition = 'WORKING' THEN 1 END) AS working_items, COUNT(CASE WHEN condition = 'MAINTENANCE' THEN 1 END) AS maintenance_items, COUNT(CASE WHEN condition = 'BROKEN' THEN 1 END) AS broken_items FROM items WHERE lab_id = :labId")
-    LiveData<List<LabItemsSummary>> getLabSummary(int labId);
+    LiveData<LabItemsSummary> getLabSummary(int labId);
 }
