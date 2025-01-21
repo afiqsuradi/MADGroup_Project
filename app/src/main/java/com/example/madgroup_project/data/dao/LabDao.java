@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.madgroup_project.data.models.Lab;
+import com.example.madgroup_project.data.models.LabItemsSummary;
 
 import java.util.List;
 
@@ -34,4 +35,8 @@ public interface LabDao {
 
     @Query("SELECT * FROM labs WHERE name LIKE '%' || :query || '%' OR code LIKE '%' || :query || '%'")
     LiveData<List<Lab>> searchLabs(String query);
+
+
+    @Query("SELECT COUNT(*) AS total_items, COUNT(CASE WHEN condition = 'WORKING' THEN 1 END) AS working_items, COUNT(CASE WHEN condition = 'MAINTENANCE' THEN 1 END) AS maintenance_items, COUNT(CASE WHEN condition = 'BROKEN' THEN 1 END) AS broken_items FROM items WHERE lab_id = :labId")
+    LiveData<List<LabItemsSummary>> getLabSummary(int labId);
 }
