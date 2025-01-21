@@ -18,7 +18,7 @@
     "name": "SteelSeries Apex Pro Keyboard",
     "type": "COMPUTER_ACCESSORY",
     "serialNumber": "KBD-STLSPRO-005",
-    "condition": "WORKING"
+    "condition": "MAINTENANCE"
   },
   {
     "lab_id":1,
@@ -32,7 +32,7 @@
     "name": "Epson Projector EB-980W",
     "type": "MISCELLANEOUS",
     "serialNumber": "PRJ-EPS980-007",
-    "condition": "WORKING"
+    "condition": "BROKEN"
   },
   {
     "lab_id": 1,
@@ -95,7 +95,7 @@
     "name":"Samsung Odyssey G7 Monitor",
     "type": "COMPUTER_ACCESSORY",
     "serialNumber":"MON-SAMG7-006",
-    "condition":"WORKING"
+    "condition":"MAINTENANCE"
   },
   {
     "lab_id": 2,
@@ -116,7 +116,7 @@
     "name":"Bose Speaker Companion 2",
     "type":"AUDIO",
     "serialNumber":"SPK-BOSE2-009",
-    "condition":"WORKING"
+    "condition":"BROKEN"
   },
   {
     "lab_id": 2,
@@ -158,7 +158,7 @@
     "name": "Logitech G213 Keyboard",
     "type": "COMPUTER_ACCESSORY",
     "serialNumber": "KBD-LOGG213-005",
-    "condition": "WORKING"
+    "condition": "MAINTENANCE"
   },
   {
     "lab_id":3,
@@ -172,7 +172,7 @@
     "name": "Sony VPL-PHZ12 Projector",
     "type": "MISCELLANEOUS",
     "serialNumber": "PRJ-SONY12-007",
-    "condition": "WORKING"
+    "condition": "BROKEN"
   },
   {
     "lab_id":3,
@@ -284,7 +284,7 @@
     "name": "Intel Core i5-13600K Desktop CPU",
     "type": "COMPUTER",
     "serialNumber": "CPU-INTEL13600-001",
-    "condition": "WORKING"
+    "condition":"WORKING"
   },
   {
     "lab_id": 5,
@@ -298,7 +298,7 @@
     "name": "Keychron K2 Keyboard",
     "type": "COMPUTER_ACCESSORY",
     "serialNumber": "KBD-KEYK2-005",
-    "condition": "WORKING"
+    "condition": "MAINTENANCE"
   },
   {
     "lab_id": 5,
@@ -326,14 +326,14 @@
     "name":"Audioengine Speaker A2+",
     "type":"AUDIO",
     "serialNumber":"SPK-AUDA2-009",
-    "condition":"WORKING"
+    "condition": "BROKEN"
   },
   {
     "lab_id": 5,
     "name": "Power Cable",
     "type": "MISCELLANEOUS",
     "serialNumber": "CBL-POWER-010",
-    "condition": "WORKING"
+    "condition":"WORKING"
   },
   {
     "lab_id":5,
@@ -403,7 +403,7 @@
     "name": "N/A Cable",
     "type": "MISCELLANEOUS",
     "serialNumber": "CBL-N/A-010",
-    "condition":"WORKING"
+    "condition": "WORKING"
   },
   {
     "lab_id":6,

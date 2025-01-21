@@ -8,9 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
+import com.example.madgroup_project.data.models.LabItemsSummary;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
 
@@ -19,6 +21,7 @@ public class LabItemsFragment extends Fragment {
     private static final String LAB_ID = "lab_id";
     private Lab lab;
     private LabViewModel labViewModel;
+
 
     public static LabItemsFragment newInstance(int param1) {
         LabItemsFragment fragment = new LabItemsFragment();
@@ -32,12 +35,6 @@ public class LabItemsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         labViewModel = new ViewModelProvider(this).get(LabViewModel.class);
-        if (getArguments() != null) {
-            int labId = getArguments().getInt(LAB_ID);
-            labViewModel.getLabById(labId).observe(this, lab -> {
-                if (lab != null) this.lab = lab;
-            });
-        }
     }
 
     @Override
