@@ -1,7 +1,5 @@
 package com.example.madgroup_project.ui.lab;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -9,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.ui.lab.fragments.LabDashboardFragment;
-import com.example.madgroup_project.ui.lab.fragments.LabItemsFragment;
+import com.example.madgroup_project.ui.item.fragments.LabItemsFragment;
 
 public class LabFragmentPagerAdapter extends FragmentStateAdapter {
 

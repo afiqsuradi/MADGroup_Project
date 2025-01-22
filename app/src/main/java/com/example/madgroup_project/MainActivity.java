@@ -14,7 +14,7 @@ import com.example.madgroup_project.ui.lab.LabListRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class    MainActivity extends AppCompatActivity {
 
     private RecyclerView labRecyclerView;
     private LabListRecyclerViewAdapter labListRecyclerViewAdapter;

@@ -22,4 +22,8 @@
 
     <color name="transparent">#00000000</color>
     <color name="semi_transparent_background">#40000000</color>
+
+    <color name="badge_positive">#007a4d</color>
+    <color name="badge_informative">#f68511</color>
+    <color name="badge_negative">#d31510</color>
 </resources>
