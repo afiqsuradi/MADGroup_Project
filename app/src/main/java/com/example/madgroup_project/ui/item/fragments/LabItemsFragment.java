@@ -68,7 +68,7 @@ public class LabItemsFragment extends Fragment {
     private void initViews(){
         itemListRecyclerView = getView().findViewById(R.id.itemListRecyclerView);
         itemListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        itemListRecyclerViewAdapter = new ItemListRecyclerViewAdapter(new ArrayList<>());
+        itemListRecyclerViewAdapter = new ItemListRecyclerViewAdapter(new ArrayList<>(), this);
         itemListRecyclerView.setAdapter(itemListRecyclerViewAdapter);
 
     }

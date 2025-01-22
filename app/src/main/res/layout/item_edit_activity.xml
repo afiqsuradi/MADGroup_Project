@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.item.ItemCreateActivity">
+    tools:context=".ui.item.ItemEditActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -197,13 +197,13 @@
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/btnAdd"
+                android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cornerRadius="12dip"
                 android:padding="8dp"
-                android:text="Add" />
+                android:text="Save" />
         </LinearLayout>
 
     </LinearLayout>
@@ -241,7 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Lab Name"
+                android:text="Edit Item"
                 android:textColor="@color/textPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"

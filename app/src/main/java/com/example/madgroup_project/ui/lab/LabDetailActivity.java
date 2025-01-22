@@ -1,4 +1,4 @@
-package com.example.madgroup_project;
+package com.example.madgroup_project.ui.lab;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -16,9 +15,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
-import com.example.madgroup_project.ui.lab.LabFragmentPagerAdapter;
+import com.example.madgroup_project.ui.item.ItemCreateActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.Objects;
@@ -26,7 +27,9 @@ import java.util.Objects;
 public class LabDetailActivity extends AppCompatActivity {
 
     private TextView tvLabCode, tvLabName, tvLabSupervisor, tvLabCapacity, tvLabDescription;
-    private ImageButton btnBack, btnAddItem, btnSettings;
+    private ImageButton btnBack, btnAddItem;
+
+    private FrameLayout btnSettings;
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private LabViewModel labViewModel;

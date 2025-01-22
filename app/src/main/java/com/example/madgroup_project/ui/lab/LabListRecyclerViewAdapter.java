@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.madgroup_project.LabDetailActivity;
 import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 

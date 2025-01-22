@@ -1,4 +1,4 @@
-package com.example.madgroup_project;
+package com.example.madgroup_project.ui.lab;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 

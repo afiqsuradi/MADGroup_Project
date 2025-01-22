@@ -1,6 +1,5 @@
-package com.example.madgroup_project;
+package com.example.madgroup_project.ui.item;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -10,14 +9,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.ItemConditions;
 import com.example.madgroup_project.data.ItemTypes;
 import com.example.madgroup_project.data.models.Item;
@@ -26,32 +22,44 @@ import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
 import java.util.Arrays;
 
-public class ItemCreateActivity extends AppCompatActivity {
+public class ItemEditActivity extends AppCompatActivity {
 
     private AutoCompleteTextView actvItemType, actvItemCondition;
     private EditText etItemName, etItemSerialNo;
-    private Button btnCancel, btnAdd;
-
+    private Button btnCancel, btnSave;
     private ImageButton btnBack;
     private TextView tvLabName;
     private int labId;
+    private int itemId;
     private LabViewModel labViewModel;
     private ItemViewModel itemViewModel;
+    private Item currentItem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_create_activity);
+        setContentView(R.layout.item_edit_activity);
 
         labViewModel = new ViewModelProvider(this).get(LabViewModel.class);
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+
+
         labId = getIntent().getIntExtra("lab_id", 1);
+        itemId = getIntent().getIntExtra("item_id", -1);
 
         initViews();
         setupItemTypeDropdown();
         setupItemConditionDropdown();
         setupListeners();
         observeLabData();
+
+
+        if (itemId != -1) {
+            loadItemData();
+        }else{
+            showToast("Invalid item id!");
+            finish();
+        }
     }
 
     private void initViews() {
@@ -60,18 +68,16 @@ public class ItemCreateActivity extends AppCompatActivity {
         etItemName = findViewById(R.id.etItemName);
         etItemSerialNo = findViewById(R.id.etItemSerialNo);
         btnCancel = findViewById(R.id.btnCancel);
-        btnAdd = findViewById(R.id.btnAdd);
+        btnSave = findViewById(R.id.btnSave);
         tvLabName = findViewById(R.id.tvLabName);
         btnBack = findViewById(R.id.btnBack);
     }
 
-
-    private void setupListeners(){
+    private void setupListeners() {
         btnCancel.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
-        btnAdd.setOnClickListener(v -> addItem());
+        btnSave.setOnClickListener(v -> saveItem());
     }
-
 
     private void setupItemTypeDropdown() {
         setupDropdown(actvItemType, ItemTypes.getAllDisplayNames());
@@ -81,7 +87,7 @@ public class ItemCreateActivity extends AppCompatActivity {
         setupDropdown(actvItemCondition, ItemConditions.getAllDisplayNames());
     }
 
-    private void setupDropdown(AutoCompleteTextView autoCompleteTextView, String[] displayNames){
+    private void setupDropdown(AutoCompleteTextView autoCompleteTextView, String[] displayNames) {
         autoCompleteTextView.setKeyListener(null);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, displayNames);
         autoCompleteTextView.setAdapter(adapter);
@@ -96,7 +102,20 @@ public class ItemCreateActivity extends AppCompatActivity {
         });
     }
 
-    private void addItem() {
+
+    private void loadItemData() {
+        itemViewModel.getItemById(itemId).observe(this, item -> {
+            if (item != null) {
+                currentItem = item;
+                etItemName.setText(item.getName());
+                etItemSerialNo.setText(item.getSerialNumber());
+                actvItemType.setText(item.getType().getDisplayName(), false);
+                actvItemCondition.setText(item.getCondition().getDisplayName(), false);
+            }
+        });
+    }
+
+    private void saveItem() {
         String itemName = etItemName.getText().toString().trim();
         String itemSerialNo = etItemSerialNo.getText().toString().trim();
         String itemType = actvItemType.getText().toString().trim();
@@ -113,22 +132,26 @@ public class ItemCreateActivity extends AppCompatActivity {
             return;
         }
 
-
         ItemConditions selectedItemCondition = getItemConditionFromDisplayName(itemCondition);
         if (selectedItemCondition == null) {
             showToast("Please select a value for item condition");
             return;
         }
 
-        Item newItem = new Item();
-        newItem.setLabId(labId);
-        newItem.setName(itemName);
-        newItem.setSerialNumber(itemSerialNo);
-        newItem.setCondition(selectedItemCondition);
-        newItem.setType(selectedItemType);
-        itemViewModel.insert(newItem);
-        showToast("Item added successfully");
-        finish();
+
+        if(currentItem != null){
+            currentItem.setName(itemName);
+            currentItem.setSerialNumber(itemSerialNo);
+            currentItem.setCondition(selectedItemCondition);
+            currentItem.setType(selectedItemType);
+            itemViewModel.update(currentItem);
+            showToast("Item updated successfully");
+            finish();
+
+        }else{
+            showToast("Error: No Item found with item id!");
+            finish();
+        }
     }
 
     private ItemTypes getItemTypeFromDisplayName(String displayName) {
@@ -144,7 +167,6 @@ public class ItemCreateActivity extends AppCompatActivity {
                 .findFirst()
                 .orElse(null);
     }
-
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

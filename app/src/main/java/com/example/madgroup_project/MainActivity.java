@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
+import com.example.madgroup_project.ui.lab.LabCreateActivity;
 import com.example.madgroup_project.ui.lab.LabListRecyclerViewAdapter;
 
 import java.util.ArrayList;

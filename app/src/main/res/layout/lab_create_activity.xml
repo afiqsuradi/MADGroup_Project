@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".LabDetailActivity">
+    tools:context=".ui.lab.LabCreateActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:layout_height="6dp" />
 
             <EditText
-                android:id="@+id/tvLabName"
+                android:id="@+id/etLabName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background"
@@ -78,7 +78,7 @@
                 android:layout_height="6dp" />
 
             <EditText
-                android:id="@+id/tvLabCode"
+                android:id="@+id/etLabCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background"
@@ -114,7 +114,7 @@
                 android:layout_height="6dp" />
 
             <EditText
-                android:id="@+id/tvLabSupervisor"
+                android:id="@+id/etLabSupervisor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background"
@@ -152,7 +152,7 @@
                 android:layout_height="6dp" />
 
             <EditText
-                android:id="@+id/tvLabCapacity"
+                android:id="@+id/etLabCapacity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background"
