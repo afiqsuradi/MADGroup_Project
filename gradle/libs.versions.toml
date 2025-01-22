@@ -10,9 +10,11 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
+workRuntime = "2.10.0"
 
 [libraries]
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

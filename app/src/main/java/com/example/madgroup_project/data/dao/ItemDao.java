@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.madgroup_project.data.ItemConditions;
 import com.example.madgroup_project.data.models.Item;
 
 import java.util.List;
@@ -38,5 +39,8 @@ public interface ItemDao {
 
     @Query("SELECT * FROM items WHERE name LIKE '%' || :query || '%' OR serial_number LIKE '%' || :query || '%'")
     LiveData<List<Item>> searchItems(String query);
+
+    @Query("SELECT * FROM items WHERE condition = :maintenanceCondition OR condition = :brokenCondition")
+    List<Item> getAllItemsByConditions(ItemConditions maintenanceCondition, ItemConditions brokenCondition);
 
 }

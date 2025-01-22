@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.madgroup_project.data.ItemConditions;
 import com.example.madgroup_project.data.dao.ItemDao;
 import com.example.madgroup_project.data.db.AppDatabase;
 import com.example.madgroup_project.data.models.Item;
@@ -56,4 +57,9 @@ public class ItemRepository {
     public LiveData<List<Item>> searchItems(String query){
         return itemDao.searchItems(query);
     }
+
+    public List<Item> getAllItemsByConditions(ItemConditions maintenanceCondition, ItemConditions brokenCondition) {
+        return itemDao.getAllItemsByConditions(maintenanceCondition, brokenCondition);
+    }
+
 }

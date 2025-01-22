@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.madgroup_project.data.ItemConditions;
 import com.example.madgroup_project.data.models.Item;
 import com.example.madgroup_project.data.repository.ItemRepository;
 
@@ -51,4 +52,9 @@ public class ItemViewModel extends AndroidViewModel {
     public LiveData<List<Item>> searchItems(String query){
         return repository.searchItems(query);
     }
+
+    public List<Item> getAllItemsByConditions(ItemConditions maintenanceCondition, ItemConditions brokenCondition) {
+        return repository.getAllItemsByConditions(maintenanceCondition, brokenCondition);
+    }
+
 }
