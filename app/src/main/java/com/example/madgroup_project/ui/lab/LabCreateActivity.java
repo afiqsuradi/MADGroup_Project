@@ -1,6 +1,8 @@
 package com.example.madgroup_project.ui.lab;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -15,6 +17,8 @@ import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 public class LabCreateActivity extends AppCompatActivity {
@@ -24,6 +28,9 @@ public class LabCreateActivity extends AppCompatActivity {
 
     private ImageButton btnBack;
     private LabViewModel labViewModel;
+    private SharedPreferences sharedPreferences;
+    private final String draftKey = "lab_create_draft";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +38,13 @@ public class LabCreateActivity extends AppCompatActivity {
         setContentView(R.layout.lab_create_activity);
 
         labViewModel = new ViewModelProvider(this).get(LabViewModel.class);
+        sharedPreferences = getSharedPreferences("LabCreatePrefs", Context.MODE_PRIVATE);
+
 
         initViews();
         setupBackButton();
         setupSaveButton();
+        loadDraft();
     }
 
     private void initViews() {
@@ -48,15 +58,28 @@ public class LabCreateActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveDraft();
+    }
+
     private void setupBackButton() {
-        btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
-        btnCancel.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        btnBack.setOnClickListener(v -> {
+            getOnBackPressedDispatcher().onBackPressed();
+        });
+        btnCancel.setOnClickListener(v -> {
+            clearDraft();
+            getOnBackPressedDispatcher().onBackPressed();
+        });
     }
 
     private void setupSaveButton() {
         btnSaveLab.setOnClickListener(v -> {
             if(validateInput()) {
                 saveLab();
+                clearDraft();
             }
         });
     }
@@ -69,7 +92,7 @@ public class LabCreateActivity extends AppCompatActivity {
         String labCapacityString = Objects.requireNonNull(etLabCapacity.getText()).toString().trim();
 
         if (TextUtils.isEmpty(labName) || TextUtils.isEmpty(labDescription) ||
-                TextUtils.isEmpty(labCode) || TextUtils.isEmpty(labSupervisor) || TextUtils.isEmpty(labCapacityString) ) {
+                TextUtils.isEmpty(labCode) || TextUtils.isEmpty(labSupervisor) || TextUtils.isEmpty(labCapacityString)) {
             showToast("Please fill out all fields.");
             return false;
         }
@@ -89,7 +112,6 @@ public class LabCreateActivity extends AppCompatActivity {
         String labSupervisor = Objects.requireNonNull(etLabSupervisor.getText()).toString().trim();
         int labCapacity = Integer.parseInt(Objects.requireNonNull(etLabCapacity.getText()).toString().trim());
 
-
         Lab newLab = new Lab(labName, labDescription, labCode, labSupervisor, "Open", labCapacity);
         labViewModel.insert(newLab);
 
@@ -99,10 +121,46 @@ public class LabCreateActivity extends AppCompatActivity {
         finish();
     }
 
+    private void saveDraft() {
+        JSONObject draftObject = new JSONObject();
+        try {
+            draftObject.put("labName", etLabName.getText().toString());
+            draftObject.put("labDescription", etLabDescription.getText().toString());
+            draftObject.put("labCode", etLabCode.getText().toString());
+            draftObject.put("labSupervisor", etLabSupervisor.getText().toString());
+            draftObject.put("labCapacity", etLabCapacity.getText().toString());
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        sharedPreferences.edit().putString(draftKey, draftObject.toString()).apply();
+
+    }
+
+    private void loadDraft() {
+        String draftString = sharedPreferences.getString(draftKey, null);
+        if (draftString != null) {
+            try {
+                JSONObject draftObject = new JSONObject(draftString);
+
+                etLabName.setText(draftObject.getString("labName"));
+                etLabDescription.setText(draftObject.getString("labDescription"));
+                etLabCode.setText(draftObject.getString("labCode"));
+                etLabSupervisor.setText(draftObject.getString("labSupervisor"));
+                etLabCapacity.setText(draftObject.getString("labCapacity"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void clearDraft(){
+        sharedPreferences.edit().remove(draftKey).apply();
+    }
+
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
-
-

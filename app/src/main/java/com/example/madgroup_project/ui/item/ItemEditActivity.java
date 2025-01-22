@@ -1,5 +1,7 @@
 package com.example.madgroup_project.ui.item;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -20,6 +22,8 @@ import com.example.madgroup_project.data.models.Item;
 import com.example.madgroup_project.data.viewmodel.ItemViewModel;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
+import org.json.JSONObject;
+
 import java.util.Arrays;
 
 public class ItemEditActivity extends AppCompatActivity {
@@ -34,6 +38,8 @@ public class ItemEditActivity extends AppCompatActivity {
     private LabViewModel labViewModel;
     private ItemViewModel itemViewModel;
     private Item currentItem;
+    private SharedPreferences sharedPreferences;
+    private final String draftKey = "item_edit_draft";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,10 +48,12 @@ public class ItemEditActivity extends AppCompatActivity {
 
         labViewModel = new ViewModelProvider(this).get(LabViewModel.class);
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        sharedPreferences = getSharedPreferences("ItemEditPrefs", Context.MODE_PRIVATE);
 
 
         labId = getIntent().getIntExtra("lab_id", 1);
         itemId = getIntent().getIntExtra("item_id", -1);
+
 
         initViews();
         setupItemTypeDropdown();
@@ -53,6 +61,7 @@ public class ItemEditActivity extends AppCompatActivity {
         setupListeners();
         observeLabData();
 
+        loadDraft();
 
         if (itemId != -1) {
             loadItemData();
@@ -60,6 +69,12 @@ public class ItemEditActivity extends AppCompatActivity {
             showToast("Invalid item id!");
             finish();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveDraft();
     }
 
     private void initViews() {
@@ -74,9 +89,15 @@ public class ItemEditActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        btnCancel.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        btnCancel.setOnClickListener(v -> {
+            clearDraft();
+            getOnBackPressedDispatcher().onBackPressed();
+        });
         btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
-        btnSave.setOnClickListener(v -> saveItem());
+        btnSave.setOnClickListener(v -> {
+            saveItem();
+            clearDraft();
+        });
     }
 
     private void setupItemTypeDropdown() {
@@ -166,6 +187,40 @@ public class ItemEditActivity extends AppCompatActivity {
                 .filter(condition -> condition.getDisplayName().equals(displayName))
                 .findFirst()
                 .orElse(null);
+    }
+
+    private void saveDraft() {
+        JSONObject draftObject = new JSONObject();
+        try {
+            draftObject.put("itemName", etItemName.getText().toString());
+            draftObject.put("itemSerial", etItemSerialNo.getText().toString());
+            draftObject.put("itemType", actvItemType.getText().toString());
+            draftObject.put("itemCondition", actvItemCondition.getText().toString());
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        sharedPreferences.edit().putString(draftKey, draftObject.toString()).apply();
+    }
+
+    private void loadDraft() {
+        String draftString = sharedPreferences.getString(draftKey, null);
+        if (draftString != null) {
+            try {
+                JSONObject draftObject = new JSONObject(draftString);
+
+                etItemName.setText(draftObject.getString("itemName"));
+                etItemSerialNo.setText(draftObject.getString("itemSerial"));
+                actvItemType.setText(draftObject.getString("itemType"));
+                actvItemCondition.setText(draftObject.getString("itemCondition"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void clearDraft(){
+        sharedPreferences.edit().remove(draftKey).apply();
     }
 
     private void showToast(String message) {

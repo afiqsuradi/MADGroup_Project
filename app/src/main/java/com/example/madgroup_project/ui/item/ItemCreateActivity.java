@@ -1,5 +1,7 @@
 package com.example.madgroup_project.ui.item;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -20,6 +22,8 @@ import com.example.madgroup_project.data.models.Item;
 import com.example.madgroup_project.data.viewmodel.ItemViewModel;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 
+import org.json.JSONObject;
+
 import java.util.Arrays;
 
 public class ItemCreateActivity extends AppCompatActivity {
@@ -27,12 +31,14 @@ public class ItemCreateActivity extends AppCompatActivity {
     private AutoCompleteTextView actvItemType, actvItemCondition;
     private EditText etItemName, etItemSerialNo;
     private Button btnCancel, btnAdd;
-
     private ImageButton btnBack;
     private TextView tvLabName;
     private int labId;
     private LabViewModel labViewModel;
     private ItemViewModel itemViewModel;
+
+    private SharedPreferences sharedPreferences;
+    private final String draftKey = "item_create_draft";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,11 +49,16 @@ public class ItemCreateActivity extends AppCompatActivity {
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         labId = getIntent().getIntExtra("lab_id", 1);
 
+        sharedPreferences = getSharedPreferences("ItemCreatePrefs", Context.MODE_PRIVATE);
+
+
         initViews();
         setupItemTypeDropdown();
         setupItemConditionDropdown();
         setupListeners();
         observeLabData();
+        loadDraft();
+
     }
 
     private void initViews() {
@@ -61,11 +72,22 @@ public class ItemCreateActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveDraft();
+    }
 
     private void setupListeners(){
-        btnCancel.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        btnCancel.setOnClickListener(v -> {
+            clearDraft();
+            getOnBackPressedDispatcher().onBackPressed();
+        });
         btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
-        btnAdd.setOnClickListener(v -> addItem());
+        btnAdd.setOnClickListener(v -> {
+            addItem();
+            clearDraft();
+        });
     }
 
 
@@ -109,7 +131,6 @@ public class ItemCreateActivity extends AppCompatActivity {
             return;
         }
 
-
         ItemConditions selectedItemCondition = getItemConditionFromDisplayName(itemCondition);
         if (selectedItemCondition == null) {
             showToast("Please select a value for item condition");
@@ -139,6 +160,43 @@ public class ItemCreateActivity extends AppCompatActivity {
                 .filter(condition -> condition.getDisplayName().equals(displayName))
                 .findFirst()
                 .orElse(null);
+    }
+
+
+    private void saveDraft() {
+        JSONObject draftObject = new JSONObject();
+        try {
+            draftObject.put("itemName", etItemName.getText().toString());
+            draftObject.put("itemSerial", etItemSerialNo.getText().toString());
+            draftObject.put("itemType", actvItemType.getText().toString());
+            draftObject.put("itemCondition", actvItemCondition.getText().toString());
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        sharedPreferences.edit().putString(draftKey, draftObject.toString()).apply();
+    }
+
+    private void loadDraft() {
+        String draftString = sharedPreferences.getString(draftKey, null);
+        if (draftString != null) {
+            try {
+                JSONObject draftObject = new JSONObject(draftString);
+
+                etItemName.setText(draftObject.getString("itemName"));
+                etItemSerialNo.setText(draftObject.getString("itemSerial"));
+                actvItemType.setText(draftObject.getString("itemType"));
+                actvItemCondition.setText(draftObject.getString("itemCondition"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void clearDraft(){
+        sharedPreferences.edit().remove(draftKey).apply();
     }
 
 
