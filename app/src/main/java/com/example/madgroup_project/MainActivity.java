@@ -1,23 +1,40 @@
 package com.example.madgroup_project;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.example.madgroup_project.data.viewmodel.LabViewModel;
+import com.example.madgroup_project.ui.lab.LabCreateActivity;
+import com.example.madgroup_project.ui.lab.LabListRecyclerViewAdapter;
+import com.example.madgroup_project.utils.ItemReminderWorker;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private LabAdapter labAdapter;
-    private List<Lab> labList = new ArrayList<>();
+    private static final String TAG = "MainActivity";
+    private static final String NOTIFICATION_PERMISSION = Manifest.permission.POST_NOTIFICATIONS;
+    private static final int REMINDER_INTERVAL_DAYS = 1;
+    private ActivityResultLauncher<String> requestPermissionLauncher;
+    private RecyclerView labRecyclerView;
+    private LabListRecyclerViewAdapter labListRecyclerViewAdapter;
+    private LabViewModel labViewModel;
     private Button btnCreateLab;
 
     @Override
@@ -25,43 +42,84 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        initializeViews();
+        setupRecyclerView();
+        setupViewModel();
+        setupButton();
+        setupPermissionLauncher();
+        checkNotificationPermission();
+    }
 
+    private void initializeViews() {
         btnCreateLab = findViewById(R.id.btnCreateLab);
+        labRecyclerView = findViewById(R.id.recyclerView);
+    }
 
-        // Example lab data
-        labList.add(new Lab("Lab 1", "This is the first lab.", List.of("Beakers", "Bunsen Burner")));
-        labList.add(new Lab("Lab 2", "This is the second lab.", List.of("Microscope", "Test Tubes")));
+    private void setupRecyclerView() {
+        labRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        labListRecyclerViewAdapter = new LabListRecyclerViewAdapter(new ArrayList<>());
+        labRecyclerView.setAdapter(labListRecyclerViewAdapter);
+    }
 
-        labAdapter = new LabAdapter(labList, lab -> {
-            Intent intent = new Intent(MainActivity.this, LabDetailActivity.class);
-            intent.putExtra("lab_name", lab.getName());
-            intent.putExtra("lab_description", lab.getDescription());
-            intent.putStringArrayListExtra("lab_equipment", new ArrayList<>(lab.getEquipment()));
-            startActivity(intent);
-        });
-
-        recyclerView.setAdapter(labAdapter);
-
-        // Handle "Create New Lab" button click
-        btnCreateLab.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CreateLabActivity.class);
-            startActivityForResult(intent, 1); // Request code 1 for result
+    private void setupViewModel() {
+        labViewModel = new ViewModelProvider(this).get(LabViewModel.class);
+        labViewModel.getAllLabs().observe(this, labs -> {
+            if (labs != null) {
+                labListRecyclerViewAdapter.setLabs(labs);
+            }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            String labName = data.getStringExtra("lab_name");
-            String labDescription = data.getStringExtra("lab_description");
-            ArrayList<String> labEquipment = data.getStringArrayListExtra("lab_equipment");
+    private void setupButton() {
+        btnCreateLab.setOnClickListener(v -> goToCreateLabActivity());
+    }
 
-            // Add the new lab to the list and refresh the adapter
-            labList.add(new Lab(labName, labDescription, labEquipment));
-            labAdapter.notifyDataSetChanged();
+    private void setupPermissionLauncher() {
+        requestPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(), isGranted -> {
+                    if (isGranted) {
+                        scheduleItemReminder();
+                    } else {
+                        showToast("Notification permission is needed to be able to get notification.");
+                        Log.w(TAG, "Notification permission denied by user.");
+                    }
+                });
+    }
+
+    private void checkNotificationPermission() {
+        if (ContextCompat.checkSelfPermission(this, NOTIFICATION_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
+            scheduleItemReminder();
+        } else if (shouldShowRequestPermissionRationale(NOTIFICATION_PERMISSION)) {
+            showToast("We need the permission to show notification!");
+            requestNotificationPermission();
+        } else {
+            requestNotificationPermission();
         }
+    }
+
+    private void requestNotificationPermission() {
+        requestPermissionLauncher.launch(NOTIFICATION_PERMISSION);
+    }
+
+    private void scheduleItemReminder() {
+        try{
+            PeriodicWorkRequest reminderWorkRequest = new PeriodicWorkRequest.Builder(
+                    ItemReminderWorker.class, REMINDER_INTERVAL_DAYS, TimeUnit.DAYS
+            ).build();
+            WorkManager.getInstance(getApplicationContext()).enqueue(reminderWorkRequest);
+            Log.i(TAG, "Scheduled item reminder worker.");
+        } catch(Exception e){
+            Log.e(TAG, "Error Scheduling item reminder worker", e);
+        }
+    }
+
+    public void goToCreateLabActivity() {
+        Intent intent = new Intent(this, LabCreateActivity.class);
+        startActivity(intent);
+    }
+
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
