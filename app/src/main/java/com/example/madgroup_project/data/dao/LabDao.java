@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.models.LabItemsSummary;
+import com.example.madgroup_project.data.models.LabsSummary;
 
 import java.util.List;
 
@@ -39,4 +40,13 @@ public interface LabDao {
 
     @Query("SELECT COUNT(*) AS total_items, COUNT(CASE WHEN condition = 'WORKING' THEN 1 END) AS working_items, COUNT(CASE WHEN condition = 'MAINTENANCE' THEN 1 END) AS maintenance_items, COUNT(CASE WHEN condition = 'BROKEN' THEN 1 END) AS broken_items FROM items WHERE lab_id = :labId")
     LiveData<LabItemsSummary> getLabSummary(int labId);
+
+    @Query("SELECT " +
+            "COUNT(*) AS total_items, " +
+            "COUNT(CASE WHEN condition = 'WORKING' THEN 1 END) AS working_items, " +
+            "COUNT(CASE WHEN condition = 'MAINTENANCE' THEN 1 END) AS maintenance_items, " +
+            "COUNT(CASE WHEN condition = 'BROKEN' THEN 1 END) AS broken_items, " +
+            "(SELECT COUNT(*) FROM labs) AS total_labs " +
+            "FROM items")
+    LiveData<LabsSummary> getAllLabsSummary();
 }

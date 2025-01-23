@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -21,6 +22,8 @@ import androidx.work.WorkManager;
 import com.example.madgroup_project.data.viewmodel.LabViewModel;
 import com.example.madgroup_project.ui.lab.LabCreateActivity;
 import com.example.madgroup_project.ui.lab.LabListRecyclerViewAdapter;
+import com.example.madgroup_project.ui.lab.fragments.LabDashboardFragment;
+import com.example.madgroup_project.utils.Debouncer;
 import com.example.madgroup_project.utils.ItemReminderWorker;
 
 import java.util.ArrayList;
@@ -37,22 +40,72 @@ public class MainActivity extends AppCompatActivity {
     private LabViewModel labViewModel;
     private Button btnCreateLab;
 
+    private Debouncer debouncer;
+
+    private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initializeViews();
+        setupFragment();
         setupRecyclerView();
+        setupSearchView();
         setupViewModel();
         setupButton();
         setupPermissionLauncher();
         checkNotificationPermission();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        searchView.clearFocus();
+    }
+
+    private void setupSearchView() {
+        debouncer = new Debouncer(1000);
+        searchView.setIconifiedByDefault(false);
+        searchView.setFocusable(true);
+        searchView.requestFocusFromTouch();
+        searchView.clearFocus();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                debouncer.cancel();
+                handleLabSearch(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                debouncer.debounce(() -> handleLabSearch(newText));
+                return false;
+            }
+        });
+    }
+
+    private void handleLabSearch(String query){
+        if (query == "") {
+            labViewModel.getAllLabs().observe(this, labs -> labListRecyclerViewAdapter.setLabs(labs));
+        } else{
+            labViewModel.searchLabs(query).observe(this, labs -> labListRecyclerViewAdapter.setLabs(labs));
+        }
+    }
+
+    private void setupFragment(){
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(R.id.fgLabDashboard, LabDashboardFragment.class, null)
+                .commit();
+    }
+
     private void initializeViews() {
         btnCreateLab = findViewById(R.id.btnCreateLab);
         labRecyclerView = findViewById(R.id.recyclerView);
+        searchView = findViewById(R.id.searchView);
     }
 
     private void setupRecyclerView() {
