@@ -11,5 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/itemListRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/card_item_view"
+        />
 </FrameLayout>

@@ -1,3 +1,4 @@
+*.svg
 # Gradle files
 .gradle/
 build/

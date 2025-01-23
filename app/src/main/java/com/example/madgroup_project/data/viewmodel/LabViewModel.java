@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.models.LabItemsSummary;
+import com.example.madgroup_project.data.models.LabsSummary;
 import com.example.madgroup_project.data.repository.LabRepository;
 
 import java.util.List;
@@ -48,5 +49,9 @@ public class LabViewModel extends AndroidViewModel {
 
     public LiveData<LabItemsSummary> getLabSummary(int labId){
         return repository.getLabSummary(labId);
+    }
+
+    public LiveData<LabsSummary> getAllLabsSummary() {
+     return repository.getAllLabsSummary();
     }
 }

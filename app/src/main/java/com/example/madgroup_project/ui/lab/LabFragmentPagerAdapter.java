@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.madgroup_project.data.models.Lab;
-import com.example.madgroup_project.ui.lab.fragments.LabDashboardFragment;
+import com.example.madgroup_project.ui.item.fragments.LabItemDashboardFragment;
 import com.example.madgroup_project.ui.item.fragments.LabItemsFragment;
 
 public class LabFragmentPagerAdapter extends FragmentStateAdapter {
@@ -22,11 +22,11 @@ public class LabFragmentPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return LabDashboardFragment.newInstance(lab.getId());
+                return LabItemDashboardFragment.newInstance(lab.getId());
             case 1:
                 return LabItemsFragment.newInstance(lab.getId());
         }
-        return LabDashboardFragment.newInstance(lab.getId());
+        return LabItemDashboardFragment.newInstance(lab.getId());
     }
 
     @Override
