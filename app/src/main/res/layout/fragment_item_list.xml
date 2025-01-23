@@ -8,10 +8,32 @@
     android:orientation="vertical"
     tools:context=".ui.item.fragments.LabItemsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/itemListRecyclerView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/card_item_view"
-        />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background_outlined_sm" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="14dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/itemListRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/card_item_view" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

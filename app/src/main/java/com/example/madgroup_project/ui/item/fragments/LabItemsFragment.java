@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.example.madgroup_project.R;
 import com.example.madgroup_project.data.models.Lab;
 import com.example.madgroup_project.data.viewmodel.ItemViewModel;
 import com.example.madgroup_project.ui.item.ItemListRecyclerViewAdapter;
+import com.example.madgroup_project.utils.Debouncer;
 
 import java.util.ArrayList;
 
@@ -24,10 +26,13 @@ import java.util.ArrayList;
 public class LabItemsFragment extends Fragment {
 
     private static final String LAB_ID = "lab_id";
-    private Lab lab;
     private ItemViewModel itemViewModel;
     private ItemListRecyclerViewAdapter itemListRecyclerViewAdapter;
     private RecyclerView itemListRecyclerView;
+
+    private SearchView searchView;
+
+    private Debouncer debouncer;
 
 
 
@@ -54,6 +59,7 @@ public class LabItemsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+        setupSearchView();
         if (getArguments() != null) {
             int labId = getArguments().getInt(LAB_ID);
             itemViewModel.getItemsByLabId(labId).observe(getViewLifecycleOwner(), items -> {
@@ -69,6 +75,40 @@ public class LabItemsFragment extends Fragment {
         itemListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         itemListRecyclerViewAdapter = new ItemListRecyclerViewAdapter(new ArrayList<>(), this);
         itemListRecyclerView.setAdapter(itemListRecyclerViewAdapter);
+        searchView = getView().findViewById(R.id.searchView);
+    }
 
+    private void setupSearchView() {
+        debouncer = new Debouncer(1000);
+        searchView.setIconifiedByDefault(false);
+        searchView.setFocusable(true);
+        searchView.requestFocusFromTouch();
+        searchView.clearFocus();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                debouncer.cancel();
+                handleItemSearch(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                debouncer.debounce(() -> handleItemSearch(newText));
+                return false;
+            }
+        });
+    }
+
+    private  void handleItemSearch(String query){
+        if (getArguments().getInt(LAB_ID) == -1) return;
+        int labId = getArguments().getInt(LAB_ID);
+        if (query == "") {
+            itemViewModel.getItemsByLabId(labId).observe(getViewLifecycleOwner(), items -> itemListRecyclerViewAdapter.setItems(items));
+        } else {
+            itemViewModel.searchItemsByLab(labId, query).observe(getViewLifecycleOwner(), items -> itemListRecyclerViewAdapter.setItems(items));
+
+        }
     }
 }
