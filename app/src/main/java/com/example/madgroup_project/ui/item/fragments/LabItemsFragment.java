@@ -70,6 +70,12 @@ public class LabItemsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (searchView != null) searchView.clearFocus();
+    }
+
     private void initViews(){
         itemListRecyclerView = getView().findViewById(R.id.itemListRecyclerView);
         itemListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
