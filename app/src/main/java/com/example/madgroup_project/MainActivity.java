@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         checkNotificationPermission();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        searchView.clearFocus();
+    }
+
     private void setupSearchView() {
         debouncer = new Debouncer(1000);
         searchView.setIconifiedByDefault(false);
