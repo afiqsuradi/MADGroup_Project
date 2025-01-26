@@ -2,6 +2,22 @@
 
 This is a mobile application designed to streamline the management and monitoring of laboratories within the Faculty of Internet Technology and Communications (FICT) at Universiti Teknikal Malaysia Melaka (UTeM).
 
+## Table of Contents
+*   [Overview](#overview)
+*   [Key Features](#key-features)
+*   [Problem Solved](#problem-solved)
+*   [Architecture](#architecture)
+*   [Team Members](#team-members)
+*   [Program Sample Run](#program-sample-run)
+    *   [Lab Overview](#lab-overview)
+    *   [Create Lab](#create-lab)
+    *   [Lab Details](#lab-details)
+    *   [Lab Settings](#lab-settings)
+    *   [Items List](#items-list)
+    *  [Notification](#notification)
+*   [YouTube Presentation](#youtube-presentation)
+*   [Getting Started](#getting-started)
+
 ## Overview
 
 The Lab Inventory System replaces traditional paper-based methods for recording lab information with a digital solution. It ensures that key data about each lab, including its name, supervisor, and inventory, is systematically stored and managed.  The application also allows administrators to monitor the condition of lab equipment, making it easier to identify facilities that need maintenance.
@@ -71,22 +87,22 @@ The development of this project was a collaborative effort, with the following m
 
 ## Program Sample Run
 ### Lab Overview
-[<img src="blob/overview.png">](https://github.com/afiqsuradi/MADGroup_Project/blob/overview.png)
+[<img src="blob/overview.png" height="600">](https://github.com/afiqsuradi/MADGroup_Project/blob/main/blob/overview.png)
 
 ### Create Lab
-[<img src="blob/create_lab.png">](https://github.com/afiqsuradi/MADGroup_Project/blob/create_lab.png)
+[<img src="blob/create_lab.png" height="600">](https://github.com/afiqsuradi/MADGroup_Project/blob/main/blob/create_lab.png)
 
 ### Lab Details
-[<img src="blob/lab_details.png">](https://github.com/afiqsuradi/MADGroup_Project/blob/lab_details.png)
+[<img src="blob/lab_details.png" height="600">](https://github.com/afiqsuradi/MADGroup_Project/blob/main/blob/lab_details.png)
 
 ### Lab Settings
-[<img src="blob/lab_setting.png">](https://github.com/afiqsuradi/MADGroup_Project/blob/lab_setting.png)
+[<img src="blob/lab_setting.png" height="600">](https://github.com/afiqsuradi/MADGroup_Project/blob/main/blob/lab_setting.png)
 
 ### Items List
-[<img src="blob/item_list.png">](https://github.com/afiqsuradi/MADGroup_Project/blob/item_list.png)
+[<img src="blob/item_list.png" height="600">](https://github.com/afiqsuradi/MADGroup_Project/blob/main/blob/item_list.png)
 
 ### Notification
-[<img src="blob/notification.png">](https://github.com/afiqsuradi/MADGroup_Project/blob/notification.png)
+[<img src="blob/notification.png" height="600">](https://github.com/afiqsuradi/MADGroup_Project/blob/main/blob/notification.png)
 
 ## YouTube Presentation
 
